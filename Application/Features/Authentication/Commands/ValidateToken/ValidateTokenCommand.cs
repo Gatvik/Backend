@@ -1,5 +1,4 @@
-﻿using Application.Models.Identity;
-using MediatR;
+﻿using MediatR;
 
 namespace Application.Features.Authentication.Commands.ValidateToken;
 

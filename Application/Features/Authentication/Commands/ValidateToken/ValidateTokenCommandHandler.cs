@@ -2,7 +2,6 @@
 using System.Security.Claims;
 using System.Text;
 using Application.Exceptions;
-using Application.Models.Identity;
 using Identity.Models;
 using MediatR;
 using Microsoft.Extensions.Options;

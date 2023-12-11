@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Application.Models.Identity;
 using MediatR;
 
 namespace Application.Features.Authentication.Commands.Register;
