@@ -21,7 +21,11 @@ public class ChangeEmailCommandHandler : IRequestHandler<ChangeEmailCommand, Uni
         var userId = _userService.UserId;
         var user = await _userManager.FindByIdAsync(userId);
         if (user is null)
-            throw new NotFoundException("User not found, but it's impossible"); 
+            throw new NotFoundException("User not found, but it's impossible");
+
+        var validationResult = await new ChangeEmailCommandValidator(_userManager).ValidateAsync(request, cancellationToken);
+        if (!validationResult.IsValid)
+            throw new BadRequestException("Invalid email address", validationResult);
         
         var emailToken = await _userManager.GenerateChangeEmailTokenAsync(user!, request.NewEmail);
         var changeEmailResult = await _userManager.ChangeEmailAsync(user, request.NewEmail, emailToken);
@@ -30,7 +34,7 @@ public class ChangeEmailCommandHandler : IRequestHandler<ChangeEmailCommand, Uni
         
         var changeUserNameResult = await _userManager.SetUserNameAsync(user, request.NewEmail);
         if (!changeUserNameResult.Succeeded)
-            throw new BadRequestException("Email already taken");
+            throw new ArgumentException("Change username operation went wrong, but it's impossible");
 
         return Unit.Value;
     }

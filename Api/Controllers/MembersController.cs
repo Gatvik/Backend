@@ -1,4 +1,5 @@
-﻿using Application.Features.Member.Commands.DeleteMemberById;
+﻿using Application.Features.Authentication.Commands.ChangeEmail;
+using Application.Features.Member.Commands.DeleteMemberById;
 using Application.Features.Member.Commands.EnrollMemberToGym;
 using Application.Features.Member.Commands.LeaveFromGym;
 using Application.Features.Member.Queries.GetMemberByCurrentUser;
@@ -45,8 +46,13 @@ public class MembersController : ControllerBase
         await _mediator.Send(new DeleteMemberByIdCommand(identityId));
         return NoContent();
     }
-    
-    
+
+    [HttpPut("changeEmail")]
+    public async Task<ActionResult> ChangeEmail(ChangeEmailCommand command)
+    {
+        await _mediator.Send(command);
+        return NoContent();
+    }
     
     [HttpPost("enrollToGym")]
     [Authorize(Roles = "Administrator")]
