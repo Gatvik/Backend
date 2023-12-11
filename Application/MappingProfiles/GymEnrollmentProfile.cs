@@ -1,4 +1,5 @@
 ﻿using Application.Features.GymEnrollment.Commands.SendRequestToEnroll;
+using Application.Features.GymEnrollment.Queries.Shared;
 using AutoMapper;
 using Domain;
 
@@ -8,5 +9,6 @@ public class GymEnrollmentProfile : Profile
 {
     public GymEnrollmentProfile()
     {
+        CreateMap<GymEnrollmentRequest, GymEnrollmentDto>();
     }
 }

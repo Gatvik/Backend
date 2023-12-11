@@ -1,5 +1,7 @@
 ﻿using Application.Features.GymEnrollment.Commands.DeleteEnrollment;
 using Application.Features.GymEnrollment.Commands.SendRequestToEnroll;
+using Application.Features.GymEnrollment.Queries.GetAllEnrollments;
+using Application.Features.GymEnrollment.Queries.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,5 +34,13 @@ public class GymEnrollmentsController : ControllerBase
     {
         await _mediator.Send(command);
         return NoContent();
+    }
+    
+    [HttpGet("getAll")]
+    [Authorize(Roles = "Administrator")]
+    public async Task<ActionResult<List<GymEnrollmentDto>>> GetAllEnrollments()
+    {
+        var result = await _mediator.Send(new GetAllEnrollmentsQuery());
+        return Ok(result);
     }
 }
