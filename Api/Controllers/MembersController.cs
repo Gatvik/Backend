@@ -46,6 +46,8 @@ public class MembersController : ControllerBase
         return NoContent();
     }
     
+    
+    
     [HttpPost("enrollToGym")]
     [Authorize(Roles = "Administrator")]
     public async Task<ActionResult<Unit>> EnrollMemberToGym(EnrollMemberToGymCommand command)
