@@ -1,4 +1,5 @@
 ﻿using Application.Features.Authentication.Commands.ChangeEmail;
+using Application.Features.Authentication.Commands.ChangePassword;
 using Application.Features.Member.Commands.DeleteMemberById;
 using Application.Features.Member.Commands.EnrollMemberToGym;
 using Application.Features.Member.Commands.LeaveFromGym;
@@ -49,6 +50,13 @@ public class MembersController : ControllerBase
 
     [HttpPut("changeEmail")]
     public async Task<ActionResult> ChangeEmail(ChangeEmailCommand command)
+    {
+        await _mediator.Send(command);
+        return NoContent();
+    }
+    
+    [HttpPut("changePassword")]
+    public async Task<ActionResult> ChangePassword(ChangePasswordCommand command)
     {
         await _mediator.Send(command);
         return NoContent();
