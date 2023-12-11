@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Application.Features.Recommendation.Queries.GetRecommendationsBySpecificMeasurement;
 
-public record GetRecommendationsBySpecificMeasurementByMemberQuery(int MeasurementId) : IRequest<GetRecommendationsResponse>;
+public record GetRecommendationsBySpecificMeasurementByMemberQuery(int MeasurementId) : IRequest<List<RecommendationDto>>;

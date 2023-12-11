@@ -22,6 +22,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IMemberRepository, MemberRepository>();
         services.AddScoped<IGymEnrollmentRepository, GymEnrollmentRepository>();
         services.AddScoped<IGymRepository, GymRepository>();
+        services.AddScoped<IRecommendationRepository, RecommendationRepository>();
 
         return services;
     }

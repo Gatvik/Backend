@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Features.Recommendation.Queries.GetRecommendationsByLatestMeasurement;
 
-public class GetRecommendationByLatestMeasurementByMemberQueryHandler : IRequestHandler<GetRecommendationByLatestMeasurementByMemberQuery, GetRecommendationsResponse>
+public class GetRecommendationByLatestMeasurementByMemberQueryHandler : IRequestHandler<GetRecommendationByLatestMeasurementByMemberQuery, List<RecommendationDto>>
 {
     private readonly IUserService _userService;
     private readonly IMemberRepository _memberRepository;
@@ -23,7 +23,7 @@ public class GetRecommendationByLatestMeasurementByMemberQueryHandler : IRequest
         _measurementRepository = measurementRepository;
     }
 
-    public async Task<GetRecommendationsResponse> Handle(GetRecommendationByLatestMeasurementByMemberQuery request,
+    public async Task<List<RecommendationDto>> Handle(GetRecommendationByLatestMeasurementByMemberQuery request,
         CancellationToken cancellationToken)
     {
         var userId = _userService.UserId;
@@ -36,7 +36,7 @@ public class GetRecommendationByLatestMeasurementByMemberQueryHandler : IRequest
             throw new NotFoundException("No measurements found for this member.");
         
         var sharedMethods = new SharedMethods(_recommendationRepository);
-        var result = new GetRecommendationsResponse { Recommendations = await sharedMethods.GenerateRecommendations(measurement, member.Sex) };
+        var result = await sharedMethods.GenerateRecommendations(measurement, member.Sex);
         return result;
     }
 
