@@ -10,8 +10,8 @@ public class RecommendationRepository : GenericRepository<Recommendation>, IReco
     {
     }
 
-    public async Task<Recommendation?> GetRecommendationByKey(string key)
+    public Task<Recommendation?> GetRecommendationByKey(string key)
     {
-        return await GetByPredicateAsync(r => r.Key == key);
+        return GetByPredicateAsync(r => r.Key == key);
     }
 }
