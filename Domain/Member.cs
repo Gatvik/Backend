@@ -7,6 +7,7 @@ public class Member : BaseEntity
     public string IdentityId { get; set; } = null!;
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
+    public string Sex { get; set; }
     public DateOnly DateOfBirth { get; set; }
 
     public int? GymId { get; set; }

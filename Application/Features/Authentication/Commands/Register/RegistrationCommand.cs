@@ -13,6 +13,7 @@ public class RegistrationCommand : IRequest<RegistrationResponse>
     public string Email { get; set; } = null!;
 
     public string Password { get; set; } = null!;
+    public string Sex { get; set; }
     
     public DateOnly DateOfBirth { get; set; }
 }

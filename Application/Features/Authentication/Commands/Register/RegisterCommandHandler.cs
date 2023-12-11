@@ -49,7 +49,8 @@ public class RegisterCommandHandler : IRequestHandler<RegistrationCommand, Regis
             IdentityId = user.Id,
             FirstName = request.FirstName,
             LastName = request.LastName,
-            DateOfBirth = request.DateOfBirth
+            DateOfBirth = request.DateOfBirth,
+            Sex = request.Sex
         };
         
         await _userManager.AddToRoleAsync(user, "Member");
