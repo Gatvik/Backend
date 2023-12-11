@@ -155,15 +155,15 @@ namespace Identity.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8a7e2bee-dd23-492b-b9ba-c4346f9271e1",
+                            ConcurrencyStamp = "5130cd93-c8c0-46bf-8151-aa0e6a912609",
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDSemGqTkYPC57CLpnIMfZNnk0P2+c3nj71+QGpLLFw70BKH+0kEg2Ix8t6PkhbdOw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED76NYFN6ziGRIUJRYRWzgdOU25cyfyFpaVT5q79R6FDxRV7e3hg8mSu8GeIyj3E/A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f87e7f7b-f07f-4b87-859d-9034caafe17d",
+                            SecurityStamp = "aad9bf62-1889-4dd4-a861-15f5d873f9de",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -171,15 +171,15 @@ namespace Identity.Migrations
                         {
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1ac14692-ed61-453c-bdeb-7a39a14bb12d",
+                            ConcurrencyStamp = "0b8191c6-ce0e-4e67-b73d-97f1b615b5a7",
                             Email = "user@localhost.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENpmGXc60aTAdYwMUcqOTxQnVOfmItgAr3fE9zm+R+uTMXRH9qldSrhykTVhnz/8Gg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEI02c89ZtHlA6tnblIFjXSbdr6TMY9qSb/Jnf2CfFu6TbFlRlogUFXW0wbBsnsN8LA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "44fdf61e-03af-47ac-a2ef-76d6c76f6251",
+                            SecurityStamp = "40612b44-ee28-4d0b-9664-31e538f579de",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
                         });
