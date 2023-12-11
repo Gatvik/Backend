@@ -27,14 +27,14 @@ public class ChangeEmailCommandHandler : IRequestHandler<ChangeEmailCommand, Uni
         if (!validationResult.IsValid)
             throw new BadRequestException("Invalid email address", validationResult);
         
+        var changeUserNameResult = await _userManager.SetUserNameAsync(user, request.NewEmail);
+        if (!changeUserNameResult.Succeeded)
+            throw new ArgumentException("Change username operation went wrong, but it's impossible");
+        
         var emailToken = await _userManager.GenerateChangeEmailTokenAsync(user!, request.NewEmail);
         var changeEmailResult = await _userManager.ChangeEmailAsync(user, request.NewEmail, emailToken);
         if (!changeEmailResult.Succeeded)
             throw new ArgumentException("Change email operation went wrong, but it's impossible");
-        
-        var changeUserNameResult = await _userManager.SetUserNameAsync(user, request.NewEmail);
-        if (!changeUserNameResult.Succeeded)
-            throw new ArgumentException("Change username operation went wrong, but it's impossible");
 
         return Unit.Value;
     }
