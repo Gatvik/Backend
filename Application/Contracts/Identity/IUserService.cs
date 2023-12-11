@@ -1,5 +1,4 @@
-﻿using Application.Models.Identity;
-using Domain;
+﻿using Domain;
 
 namespace Application.Contracts.Identity;
 

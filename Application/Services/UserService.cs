@@ -1,7 +1,6 @@
 ﻿using System.Security.Claims;
 using Application.Contracts.Identity;
 using Application.Exceptions;
-using Application.Models.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 

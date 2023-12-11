@@ -2,7 +2,6 @@
 using Application.Features.Authentication.Commands.Login;
 using Application.Features.Authentication.Commands.Register;
 using Application.Features.Authentication.Commands.ValidateToken;
-using Application.Models.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
