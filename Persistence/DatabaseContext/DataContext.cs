@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
+using Persistence.Repositories;
 
 namespace Persistence.DatabaseContext;
 
@@ -20,4 +21,5 @@ public class DataContext : DbContext
     public DbSet<Gym> Gyms { get; set; } = null!;
     public DbSet<Measurement> Measurements { get; set; } = null!;
     public DbSet<GymEnrollmentRequest> GymEnrollmentRequests { get; set; } = null!;
+    public DbSet<Recomendation> Recomendations { get; set; } = null!;
 }

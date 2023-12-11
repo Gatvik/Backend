@@ -24,6 +24,7 @@ public class MemberConfiguration : IEntityTypeConfiguration<Domain.Member>
                 IdentityId = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                 FirstName = "User",
                 LastName = "Userovich",
+                Sex = "Male",
                 DateOfBirth = new DateOnly(2004,1,9)
             }
         );
