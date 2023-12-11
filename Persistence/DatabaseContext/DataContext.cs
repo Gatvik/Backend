@@ -21,5 +21,5 @@ public class DataContext : DbContext
     public DbSet<Gym> Gyms { get; set; } = null!;
     public DbSet<Measurement> Measurements { get; set; } = null!;
     public DbSet<GymEnrollmentRequest> GymEnrollmentRequests { get; set; } = null!;
-    public DbSet<Recomendation> Recomendations { get; set; } = null!;
+    public DbSet<Recommendation> Recommendations { get; set; } = null!;
 }

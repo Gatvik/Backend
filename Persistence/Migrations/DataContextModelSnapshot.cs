@@ -167,7 +167,7 @@ namespace Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Persistence.Repositories.Recomendation", b =>
+            modelBuilder.Entity("Domain.Recommendation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -185,7 +185,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Recomendations");
+                    b.ToTable("Recommendations");
 
                     b.HasData(
                         new
