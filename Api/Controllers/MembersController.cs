@@ -1,7 +1,9 @@
-﻿using Application.Features.Member.Commands.EnrollMemberToGym;
+﻿using Application.Features.Member.Commands.DeleteMemberById;
+using Application.Features.Member.Commands.EnrollMemberToGym;
 using Application.Features.Member.Commands.LeaveFromGym;
 using Application.Features.Member.Queries.GetMemberByCurrentUser;
 using Application.Features.Member.Queries.GetMemberByIdentityId;
+using Application.Features.Member.Queries.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +36,14 @@ public class MembersController : ControllerBase
     {
         var member = await _mediator.Send(new GetMemberByCurrentUserQuery());
         return Ok(member);
+    }
+
+    [HttpDelete("deleteUser/{identityId}")]
+    [Authorize(Roles = "Administrator")]
+    public async Task<ActionResult> DeleteUserById(string identityId)
+    {
+        await _mediator.Send(new DeleteMemberByIdCommand(identityId));
+        return NoContent();
     }
     
     [HttpPost("enrollToGym")]
