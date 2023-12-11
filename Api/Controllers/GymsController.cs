@@ -37,6 +37,7 @@ public class GymsController : ControllerBase
     }
     
     [HttpGet("getAll")]
+    [Authorize(Roles = "Administrator")]
     public async Task<ActionResult<List<GymDto>>> GetAllGyms()
     {
         var result = await _mediator.Send(new GetAllGymsQuery());
