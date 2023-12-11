@@ -1,44 +1,18 @@
 ﻿using System.Text;
-using Application.Contracts.Identity;
 using Application.Contracts.Persistence;
-using Application.Exceptions;
-using MediatR;
 
-namespace Application.Features.Recommendation.Queries.GetRecommendationsByLatestMeasurement;
+namespace Application.Features.Recommendation.Queries.Shared;
 
-public class GetRecommendationByMemberQueryHandler : IRequestHandler<GetRecommendationByMemberQuery, GetRecommendationsResponse>
+public class SharedMethods
 {
-    private readonly IUserService _userService;
-    private readonly IMemberRepository _memberRepository;
     private readonly IRecommendationRepository _recommendationRepository;
-    private readonly IMeasurementRepository _measurementRepository;
 
-    public GetRecommendationByMemberQueryHandler(IUserService userService, IMemberRepository memberRepository,
-        IRecommendationRepository recommendationRepository, IMeasurementRepository measurementRepository)
+    public SharedMethods(IRecommendationRepository recommendationRepository)
     {
-        _userService = userService;
-        _memberRepository = memberRepository;
         _recommendationRepository = recommendationRepository;
-        _measurementRepository = measurementRepository;
     }
-
-    public async Task<GetRecommendationsResponse> Handle(GetRecommendationByMemberQuery request,
-        CancellationToken cancellationToken)
-    {
-        var userId = _userService.UserId;
-        var member = await _memberRepository.GetByIdentityIdAsync(userId);
-        if (member is null)
-            throw new NotFoundException("Member don't binded to identity user... Please contact with admin.");
-        
-        var measurement = await _measurementRepository.GetLatestMeasurementByMember(member.Id);
-        if (measurement is null)
-            throw new NotFoundException("No measurements found for this member.");
-
-        var result = new GetRecommendationsResponse { Recommendations = await GenerateRecommendations(measurement, member.Sex) };
-        return result;
-    }
-
-    private async Task<string> GenerateRecommendations(Domain.Measurement measurement, string sex)
+    
+    public async Task<string> GenerateRecommendations(Domain.Measurement measurement, string sex)
     {
         StringBuilder recommendations = new();
         

@@ -1,4 +1,4 @@
-﻿namespace Application.Features.Recommendation.Queries.GetRecommendationsByLatestMeasurement;
+﻿namespace Application.Features.Recommendation.Queries.Shared;
 
 public class GetRecommendationsResponse
 {

@@ -21,7 +21,6 @@
 
     <ItemGroup>
       <Folder Include="Features\Authentication\Queries\" />
-      <Folder Include="Features\Recommendation\Queries\GetRecommendationsBySpecificMeasurement\" />
     </ItemGroup>
 
 </Project>
