@@ -9,4 +9,9 @@ public class GymEnrollmentRepository : GenericRepository<GymEnrollmentRequest>, 
     public GymEnrollmentRepository(DataContext context) : base(context)
     {
     }
+    
+    public Task<IReadOnlyList<GymEnrollmentRequest>> GetAllByMemberIdAsync(int memberId)
+    {
+        return GetAllByPredicateAsync(x => x.MemberId == memberId);
+    }
 }
