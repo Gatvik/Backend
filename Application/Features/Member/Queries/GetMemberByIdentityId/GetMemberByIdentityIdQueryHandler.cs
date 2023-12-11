@@ -1,5 +1,6 @@
 ﻿using Application.Contracts.Persistence;
 using Application.Exceptions;
+using Application.Features.Member.Queries.Shared;
 using AutoMapper;
 using MediatR;
 
@@ -20,7 +21,7 @@ public class GetMemberByIdentityIdQueryHandler : IRequestHandler<GetMemberByIden
     {
         var member = await _memberRepository.GetByIdentityIdAsync(request.IdentityId);
         if (member is null)
-            throw new NotFoundException($"{nameof(Member)} with identity id {request.IdentityId} was not found.");
+            throw new NotFoundException(nameof(Member), request.IdentityId);
 
         return _mapper.Map<MemberDto>(member);
     }

@@ -2,6 +2,7 @@
 using Application.Contracts.Persistence;
 using Application.Exceptions;
 using Application.Features.Member.Queries.GetMemberByIdentityId;
+using Application.Features.Member.Queries.Shared;
 using AutoMapper;
 using MediatR;
 

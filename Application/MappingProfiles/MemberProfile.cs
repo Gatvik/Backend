@@ -1,4 +1,5 @@
 ﻿using Application.Features.Member.Queries.GetMemberByIdentityId;
+using Application.Features.Member.Queries.Shared;
 using AutoMapper;
 using Domain;
 
