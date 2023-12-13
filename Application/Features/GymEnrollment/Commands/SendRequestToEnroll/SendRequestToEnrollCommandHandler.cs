@@ -40,6 +40,8 @@ public class SendRequestToEnrollCommandHandler : IRequestHandler<SendRequestToEn
             throw new NotFoundException(nameof(Domain.Gym), request.GymId);
 
         var gymEnrollment = new GymEnrollmentRequest { GymId = gym.Id, MemberId = member.Id};
+        gymEnrollment.EnrollmentDateTime = DateTime.UtcNow;
+        
         await _gymEnrollmentRepository.CreateAsync(gymEnrollment);
 
         return gymEnrollment.Id;
