@@ -22,14 +22,6 @@ public class GymsController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost("create")]
-    [Authorize(Roles = "Administrator")]
-    public async Task<ActionResult<int>> CreateGym(CreateGymCommand command)
-    {
-        var result = await _mediator.Send(command);
-        return CreatedAtAction(nameof(CreateGym), new { id = result });
-    }
-
     [HttpGet("getByUser")]
     [Authorize(Roles = "Member")]
     public async Task<ActionResult<GymDto>> GetUserGym()
@@ -60,5 +52,13 @@ public class GymsController : ControllerBase
     {
         var result = await _mediator.Send(command);
         return Ok(result);
+    }
+    
+    [HttpPost("create")]
+    [Authorize(Roles = "Administrator")]
+    public async Task<ActionResult<int>> CreateGym(CreateGymCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return CreatedAtAction(nameof(CreateGym), new { id = result });
     }
 }

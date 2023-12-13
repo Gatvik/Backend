@@ -40,12 +40,12 @@ public class MembersController : ControllerBase
         var member = await _mediator.Send(new GetMemberByCurrentUserQuery());
         return Ok(member);
     }
-
-    [HttpDelete("deleteUser/{identityId}")]
+    
+    [HttpPost("enrollToGym")]
     [Authorize(Roles = "Administrator")]
-    public async Task<ActionResult> DeleteUserById(string identityId)
+    public async Task<ActionResult> EnrollMemberToGym(EnrollMemberToGymCommand command)
     {
-        await _mediator.Send(new DeleteMemberByIdCommand(identityId));
+        await _mediator.Send(command);
         return NoContent();
     }
 
@@ -63,9 +63,9 @@ public class MembersController : ControllerBase
         return NoContent();
     }
     
-    [HttpPost("enrollToGym")]
-    [Authorize(Roles = "Administrator")]
-    public async Task<ActionResult> EnrollMemberToGym(EnrollMemberToGymCommand command)
+    [HttpPut("updateMember")]
+    [Authorize(Roles = "Member")]
+    public async Task<ActionResult> UpdateMember(UpdateMemberCommand command)
     {
         await _mediator.Send(command);
         return NoContent();
@@ -79,11 +79,11 @@ public class MembersController : ControllerBase
         return NoContent();
     }
     
-    [HttpPut("updateMember")]
-    [Authorize(Roles = "Member")]
-    public async Task<ActionResult> UpdateMember(UpdateMemberCommand command)
+    [HttpDelete("deleteUser/{identityId}")]
+    [Authorize(Roles = "Administrator")]
+    public async Task<ActionResult> DeleteUserById(string identityId)
     {
-        await _mediator.Send(command);
+        await _mediator.Send(new DeleteMemberByIdCommand(identityId));
         return NoContent();
     }
 }
