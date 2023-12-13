@@ -3,6 +3,7 @@ using Application.Features.Authentication.Commands.ChangePassword;
 using Application.Features.Member.Commands.DeleteMemberById;
 using Application.Features.Member.Commands.EnrollMemberToGym;
 using Application.Features.Member.Commands.LeaveFromGym;
+using Application.Features.Member.Commands.UpdateMember;
 using Application.Features.Member.Queries.GetMemberByCurrentUser;
 using Application.Features.Member.Queries.GetMemberByIdentityId;
 using Application.Features.Member.Queries.Shared;
@@ -64,7 +65,7 @@ public class MembersController : ControllerBase
     
     [HttpPost("enrollToGym")]
     [Authorize(Roles = "Administrator")]
-    public async Task<ActionResult<Unit>> EnrollMemberToGym(EnrollMemberToGymCommand command)
+    public async Task<ActionResult> EnrollMemberToGym(EnrollMemberToGymCommand command)
     {
         await _mediator.Send(command);
         return NoContent();
@@ -72,9 +73,17 @@ public class MembersController : ControllerBase
     
     [HttpDelete("leaveFromGym")]
     [Authorize(Roles = "Member")]
-    public async Task<ActionResult<Unit>> LeaveFromGym()
+    public async Task<ActionResult> LeaveFromGym()
     {
         await _mediator.Send(new LeaveFromGymCommand());
+        return NoContent();
+    }
+    
+    [HttpPut("updateMember")]
+    [Authorize(Roles = "Member")]
+    public async Task<ActionResult> UpdateMember(UpdateMemberCommand command)
+    {
+        await _mediator.Send(command);
         return NoContent();
     }
 }
