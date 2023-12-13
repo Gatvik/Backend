@@ -42,10 +42,10 @@ public class CreateMeasurementCommandHandler : IRequestHandler<CreateMeasurement
         measurementToCreate.MemberId = member.Id;
 
         // BMI = weight (kg) / height (m)2
-        measurementToCreate.BodyMassIndex = measurementToCreate.Weight / Math.Pow(measurementToCreate.Height / 100, 2);
+        measurementToCreate.BodyMassIndex = Math.Round(measurementToCreate.Weight / Math.Pow(measurementToCreate.Height / 100, 2), 1);
         // Level of stress = (upper pressure + lower pressure) / 2
         measurementToCreate.LevelOfStress =
-            (measurementToCreate.UpperPressure + measurementToCreate.LowerPressure) / 2.0;
+            Math.Round((measurementToCreate.UpperPressure + measurementToCreate.LowerPressure) / 2.0, 1);
 
         await _measurementRepository.CreateAsync(measurementToCreate);
 
