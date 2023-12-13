@@ -4,6 +4,7 @@ using Application.Features.Member.Commands.DeleteMemberById;
 using Application.Features.Member.Commands.EnrollMemberToGym;
 using Application.Features.Member.Commands.LeaveFromGym;
 using Application.Features.Member.Commands.UpdateMember;
+using Application.Features.Member.Queries.GetAll;
 using Application.Features.Member.Queries.GetMemberByCurrentUser;
 using Application.Features.Member.Queries.GetMemberByIdentityId;
 using Application.Features.Member.Queries.Shared;
@@ -25,7 +26,7 @@ public class MembersController : ControllerBase
         _mediator = mediator;
     }
     
-    [HttpGet("{identityId}")]
+    [HttpGet("getByIdentity/{identityId}")]
     [Authorize(Roles = "Administrator")]
     public async Task<ActionResult<MemberDto>> GetMemberByIdentityId(string identityId)
     {
@@ -33,7 +34,7 @@ public class MembersController : ControllerBase
         return Ok(member);
     }
     
-    [HttpGet("getByCurrentUser")]
+    [HttpGet("getByUser")]
     [Authorize(Roles = "Member")]
     public async Task<ActionResult<MemberDto>> GetMemberByCurrentUser()
     {
@@ -41,7 +42,15 @@ public class MembersController : ControllerBase
         return Ok(member);
     }
     
-    [HttpPost("enrollToGym")]
+    [HttpGet("getAll")]
+    [Authorize(Roles = "Administrator")]
+    public async Task<ActionResult<List<MemberDto>>> GetAllMembers()
+    {
+        var members = await _mediator.Send(new GetAllMembersQuery());
+        return Ok(members);
+    }
+    
+    [HttpPut("enrollToGym")]
     [Authorize(Roles = "Administrator")]
     public async Task<ActionResult> EnrollMemberToGym(EnrollMemberToGymCommand command)
     {
@@ -63,7 +72,7 @@ public class MembersController : ControllerBase
         return NoContent();
     }
     
-    [HttpPut("updateMember")]
+    [HttpPut("updateInfo")]
     [Authorize(Roles = "Member")]
     public async Task<ActionResult> UpdateMember(UpdateMemberCommand command)
     {
@@ -71,7 +80,7 @@ public class MembersController : ControllerBase
         return NoContent();
     }
     
-    [HttpDelete("leaveFromGym")]
+    [HttpPut("leaveFromGym")]
     [Authorize(Roles = "Member")]
     public async Task<ActionResult> LeaveFromGym()
     {
@@ -81,7 +90,7 @@ public class MembersController : ControllerBase
     
     [HttpDelete("deleteUser/{identityId}")]
     [Authorize(Roles = "Administrator")]
-    public async Task<ActionResult> DeleteUserById(string identityId)
+    public async Task<ActionResult> DeleteMemberById(string identityId)
     {
         await _mediator.Send(new DeleteMemberByIdCommand(identityId));
         return NoContent();
