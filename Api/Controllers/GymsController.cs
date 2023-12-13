@@ -1,4 +1,5 @@
 ﻿using Application.Features.Gym.Commands.CreateGym;
+using Application.Features.Gym.Commands.DeleteGym;
 using Application.Features.Gym.Queries.GetAllGyms;
 using Application.Features.Gym.Queries.GetGymOfCurrentUser;
 using Application.Features.Gym.Queries.Shared;
@@ -19,15 +20,15 @@ public class GymsController : ControllerBase
     {
         _mediator = mediator;
     }
-    
+
     [HttpPost("create")]
     [Authorize(Roles = "Administrator")]
     public async Task<ActionResult<int>> CreateGym(CreateGymCommand command)
     {
         var result = await _mediator.Send(command);
-        return CreatedAtAction(nameof(CreateGym), new {id = result});
+        return CreatedAtAction(nameof(CreateGym), new { id = result });
     }
-    
+
     [HttpGet("getByUser")]
     [Authorize(Roles = "Member")]
     public async Task<ActionResult<GymDto>> GetUserGym()
@@ -35,12 +36,20 @@ public class GymsController : ControllerBase
         var result = await _mediator.Send(new GetGymOfCurrentUserQuery());
         return Ok(result);
     }
-    
+
     [HttpGet("getAll")]
     [Authorize(Roles = "Administrator")]
     public async Task<ActionResult<List<GymDto>>> GetAllGyms()
     {
         var result = await _mediator.Send(new GetAllGymsQuery());
+        return Ok(result);
+    }
+
+    [HttpDelete("delete/{id:int}")]
+    [Authorize(Roles = "Administrator")]
+    public async Task<ActionResult> DeleteGym(int id)
+    {
+        var result = await _mediator.Send(new DeleteGymCommand(id));
         return Ok(result);
     }
 }
