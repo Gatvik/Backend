@@ -22,7 +22,14 @@ public class GymsController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("getByUser")]
+    [HttpGet("getAll")]
+    public async Task<ActionResult<List<GymDto>>> GetAllGyms()
+    {
+        var result = await _mediator.Send(new GetAllGymsQuery());
+        return Ok(result);
+    }
+    
+    [HttpGet("getByMember")]
     [Authorize(Roles = "Member")]
     public async Task<ActionResult<GymDto>> GetUserGym()
     {
@@ -30,15 +37,7 @@ public class GymsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("getAll")]
-    [Authorize(Roles = "Administrator")]
-    public async Task<ActionResult<List<GymDto>>> GetAllGyms()
-    {
-        var result = await _mediator.Send(new GetAllGymsQuery());
-        return Ok(result);
-    }
-
-    [HttpDelete("delete/{id:int}")]
+    [HttpDelete("{id:int}")]
     [Authorize(Roles = "Administrator")]
     public async Task<ActionResult> DeleteGym(int id)
     {
@@ -46,7 +45,7 @@ public class GymsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPut("update")]
+    [HttpPut]
     [Authorize(Roles = "Administrator")]
     public async Task<ActionResult> UpdateGym(UpdateGymCommand command)
     {
@@ -54,7 +53,7 @@ public class GymsController : ControllerBase
         return Ok(result);
     }
     
-    [HttpPost("create")]
+    [HttpPost]
     [Authorize(Roles = "Administrator")]
     public async Task<ActionResult<int>> CreateGym(CreateGymCommand command)
     {

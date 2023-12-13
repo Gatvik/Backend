@@ -27,7 +27,7 @@ public class RecommendationsController : ControllerBase
         return Ok(await _mediator.Send(new GetRecommendationByLatestMeasurementByMemberQuery()));
     }
 
-    [HttpGet("getBySpecificMeasurementByMember")]
+    [HttpGet("getBySpecificMeasurementByMember/{measurementId:int}")]
     [Authorize(Roles = "Member")]
     public async Task<ActionResult<RecommendationDto>> GetByLatestMeasurementByMember(
         int measurementId)

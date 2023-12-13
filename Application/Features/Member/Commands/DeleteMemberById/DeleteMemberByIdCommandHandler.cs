@@ -22,9 +22,18 @@ public class DeleteMemberByIdCommandHandler : IRequestHandler<DeleteMemberByIdCo
     public async Task<Unit> Handle(DeleteMemberByIdCommand request, CancellationToken cancellationToken)
     {
         var userId = _userService.UserId;
-        var user = await _userManager.FindByIdAsync(userId);
-        var member = await _memberRepository.GetByIdentityIdAsync(userId);
-        if (user == null || member == null)
+        var user = await _userManager.FindByIdAsync(request.IdentityId);
+        if (user is null)
+            throw new NotFoundException("Member not found");
+        
+        var userRoles = await _userManager.GetRolesAsync(user);
+        if (user.Id == userId)
+            throw new BadRequestException("You can't delete yourself");
+        if (userRoles.Contains("Administrator"))
+            throw new BadRequestException("You can't delete administrator");
+        
+        var member = await _memberRepository.GetByIdentityIdAsync(request.IdentityId);
+        if (member == null)
             throw new NotFoundException("Impossible exception, but user and member not binded");
         
         

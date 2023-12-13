@@ -37,7 +37,7 @@ public class GymEnrollmentsController : ControllerBase
         return Ok(result);
     }
     
-    [HttpPost("sendEnrollmentRequest")]
+    [HttpPost]
     [Authorize(Roles = "Member")]
     public async Task<ActionResult<int>> SendEnrollmentRequest(SendRequestToEnrollCommand command)
     {
@@ -45,11 +45,11 @@ public class GymEnrollmentsController : ControllerBase
         return CreatedAtAction(nameof(SendEnrollmentRequest), new { enrollmentId = result });
     }
     
-    [HttpDelete("deleteEnrollment")]
+    [HttpDelete("{id:int}")]
     [Authorize(Roles = "Administrator")]
-    public async Task<ActionResult<Unit>> DeleteEnrollment(DeleteEnrollmentCommand command)
+    public async Task<ActionResult> DeleteEnrollment(int id)
     {
-        await _mediator.Send(command);
+        await _mediator.Send(new DeleteEnrollmentCommand { GymEnrollmentId = id });
         return NoContent();
     }
 }
