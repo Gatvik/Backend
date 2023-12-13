@@ -8,10 +8,6 @@ public class CreateMeasurementValidator : AbstractValidator<CreateMeasurementCom
 {
     public CreateMeasurementValidator()
     {
-        
-        // RuleFor(m => m.MemberId)
-        //     .MustAsync(MemberMustExist);
-        
         RuleFor(m => m.Height)
             .GreaterThan(0.0d).WithMessage("{PropertyName} must be greater than 0.0")
             .LessThanOrEqualTo(300.0d).WithMessage("{PropertyName} must be less than or equal to 300.0");
@@ -32,11 +28,4 @@ public class CreateMeasurementValidator : AbstractValidator<CreateMeasurementCom
             .GreaterThan(0).WithMessage("{PropertyName} must be greater than 0")
             .LessThanOrEqualTo(250).WithMessage("{PropertyName} must be less than or equal to 250");
     }
-
-    // private async Task<bool> MemberMustExist(int memberId, CancellationToken cts)
-    // {
-    //     var member = await _memberRepository.GetByIdAsync(memberId);
-    //     
-    //     return member != null;
-    // }
 }

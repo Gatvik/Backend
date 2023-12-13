@@ -34,6 +34,8 @@ public class CreateMeasurementCommandHandler : IRequestHandler<CreateMeasurement
         var member = await _memberRepository.GetByIdentityIdAsync(userId);
         if (member is null)
             throw new NotFoundException("Member don't binded to identity user... Please contact with admin.");
+        if (member.GymId is null)
+            throw new BadRequestException("Member not enrolled to gym");
 
         var measurementToCreate = _mapper.Map<Domain.Measurement>(request);
         measurementToCreate.DateAndTime = DateTime.UtcNow;
