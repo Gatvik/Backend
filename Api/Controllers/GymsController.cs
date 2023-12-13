@@ -1,5 +1,6 @@
 ﻿using Application.Features.Gym.Commands.CreateGym;
 using Application.Features.Gym.Commands.DeleteGym;
+using Application.Features.Gym.Commands.UpdateGym;
 using Application.Features.Gym.Queries.GetAllGyms;
 using Application.Features.Gym.Queries.GetGymOfCurrentUser;
 using Application.Features.Gym.Queries.Shared;
@@ -50,6 +51,14 @@ public class GymsController : ControllerBase
     public async Task<ActionResult> DeleteGym(int id)
     {
         var result = await _mediator.Send(new DeleteGymCommand(id));
+        return Ok(result);
+    }
+
+    [HttpPut("update")]
+    [Authorize(Roles = "Administrator")]
+    public async Task<ActionResult> UpdateGym(UpdateGymCommand command)
+    {
+        var result = await _mediator.Send(command);
         return Ok(result);
     }
 }
