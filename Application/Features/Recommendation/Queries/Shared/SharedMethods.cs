@@ -19,23 +19,23 @@ public class SharedMethods
         recommendations.Add(new RecommendationDto
         {
             Theme = "Body mass index",
-            Recommendation = measurement.BodyMassIndex switch
+            Key = measurement.BodyMassIndex switch
             {
-                <= 16.0d => await GetRecommendationByKey("ExtremelyLowBMI"),
-                > 16.0d and <= 18.5d => await GetRecommendationByKey("LowBMI"),
-                > 18.5d and <= 25.0d => await GetRecommendationByKey("NormalBMI"),
-                > 25.0d and <= 30.0d => await GetRecommendationByKey("HighBMI"),
-                > 30.0d => await GetRecommendationByKey("ExtremelyHighBMI")
+                <= 16.0d => await ValidateKey("ExtremelyLowBMI"),
+                > 16.0d and <= 18.5d => await ValidateKey("LowBMI"),
+                > 18.5d and <= 25.0d => await ValidateKey("NormalBMI"),
+                > 25.0d and <= 30.0d => await ValidateKey("HighBMI"),
+                > 30.0d => await ValidateKey("ExtremelyHighBMI")
             }
         });
 
         recommendations.Add(new RecommendationDto
         {
             Theme = "Level of stress",
-            Recommendation = measurement.LevelOfStress switch
+            Key = measurement.LevelOfStress switch
             {
-                <= 107.5d => await GetRecommendationByKey("NormalStress"),
-                > 107.5d => await GetRecommendationByKey("HighStress")
+                <= 107.5d => await ValidateKey("NormalStress"),
+                > 107.5d => await ValidateKey("HighStress")
             }
         });
 
@@ -46,55 +46,55 @@ public class SharedMethods
         if (upperPressure < 125)
         {
             if (lowerPressure < 75)
-                pressureRecommendation.Recommendation = await GetRecommendationByKey("LowPressure");
+                pressureRecommendation.Key = await ValidateKey("LowPressure");
             else if (lowerPressure <= 87)
-                pressureRecommendation.Recommendation = await GetRecommendationByKey("NormalPressure");
+                pressureRecommendation.Key = await ValidateKey("NormalPressure");
             else
-                pressureRecommendation.Recommendation = await GetRecommendationByKey("HighPressure");
+                pressureRecommendation.Key = await ValidateKey("HighPressure");
             recommendations.Add(pressureRecommendation);
         }
         else if (upperPressure <= 135)
         {
             if (lowerPressure < 75)
-                pressureRecommendation.Recommendation = await GetRecommendationByKey("LowPressure");
+                pressureRecommendation.Key = await ValidateKey("LowPressure");
             else if (lowerPressure <= 87)
-                pressureRecommendation.Recommendation = await GetRecommendationByKey("NormalPressure");
+                pressureRecommendation.Key = await ValidateKey("NormalPressure");
             else
-                pressureRecommendation.Recommendation = await GetRecommendationByKey("HighPressure");
+                pressureRecommendation.Key = await ValidateKey("HighPressure");
             recommendations.Add(pressureRecommendation);
         }
         else
         {
             if (lowerPressure < 75)
-                pressureRecommendation.Recommendation = await GetRecommendationByKey("LowPressure");
+                pressureRecommendation.Key = await ValidateKey("LowPressure");
             else if (lowerPressure <= 87)
-                pressureRecommendation.Recommendation = await GetRecommendationByKey("NormalPressure");
+                pressureRecommendation.Key = await ValidateKey("NormalPressure");
             else
-                pressureRecommendation.Recommendation = await GetRecommendationByKey("HighPressure");
+                pressureRecommendation.Key = await ValidateKey("HighPressure");
             recommendations.Add(pressureRecommendation);
         }
 
-        if (sex is "Male")
+        if (sex is "male")
         {
             recommendations.Add(new RecommendationDto
             {
                 Theme = "Fat percentage",
-                Recommendation = measurement.FatPercentage switch
+                Key = measurement.FatPercentage switch
                 {
-                    < 14.0d => await GetRecommendationByKey("LowFat"),
-                    >= 14.0d and <= 20.0d => await GetRecommendationByKey("NormalFat"),
-                    > 20.0d => await GetRecommendationByKey("HighFat"),
+                    < 14.0d => await ValidateKey("LowFat"),
+                    >= 14.0d and <= 20.0d => await ValidateKey("NormalFat"),
+                    > 20.0d => await ValidateKey("HighFat"),
                 }
             });
             
             recommendations.Add(new RecommendationDto
             {
                 Theme = "Muscle percentage",
-                Recommendation = measurement.MusclePercentage switch
+                Key = measurement.MusclePercentage switch
                 {
-                    < 35.0d => await GetRecommendationByKey("LowMuscle"),
-                    >= 35.0d and <= 45.0d => await GetRecommendationByKey("NormalMuscle"),
-                    > 45.0d => await GetRecommendationByKey("HighMuscle"),
+                    < 35.0d => await ValidateKey("LowMuscle"),
+                    >= 35.0d and <= 45.0d => await ValidateKey("NormalMuscle"),
+                    > 45.0d => await ValidateKey("HighMuscle"),
                 }
             });
             
@@ -107,27 +107,27 @@ public class SharedMethods
             //     (> 140, 89) => await GetRecommendationByKey("HighPressure"),
             // });
         }
-        else if (sex is "Female")
+        else if (sex is "female")
         {
             recommendations.Add(new RecommendationDto
             {
                 Theme = "Fat percentage",
-                Recommendation = measurement.FatPercentage switch
+                Key = measurement.FatPercentage switch
                 {
-                    < 19.0d => await GetRecommendationByKey("LowFat"),
-                    >= 19.0d and <= 25.0d => await GetRecommendationByKey("NormalFat"),
-                    > 25.0d => await GetRecommendationByKey("HighFat"),
+                    < 19.0d => await ValidateKey("LowFat"),
+                    >= 19.0d and <= 25.0d => await ValidateKey("NormalFat"),
+                    > 25.0d => await ValidateKey("HighFat"),
                 }
             });
             
             recommendations.Add(new RecommendationDto
             {
                 Theme = "Muscle percentage",
-                Recommendation = measurement.FatPercentage switch
+                Key = measurement.FatPercentage switch
                 {
-                    < 25.0d => await GetRecommendationByKey("LowMuscle"),
-                    >= 25.0d and <= 35.0d => await GetRecommendationByKey("NormalMuscle"),
-                    > 35.0d => await GetRecommendationByKey("HighMuscle"),
+                    < 25.0d => await ValidateKey("LowMuscle"),
+                    >= 25.0d and <= 35.0d => await ValidateKey("NormalMuscle"),
+                    > 35.0d => await ValidateKey("HighMuscle"),
                 }
             });
 
@@ -142,12 +142,12 @@ public class SharedMethods
         return recommendations;
     }
 
-    private async Task<string> GetRecommendationByKey(string key)
+    private async Task<string> ValidateKey(string key)
     {
-        var recommendation = await _recommendationRepository.GetRecommendationByKey(key);
-        if (recommendation is null)
+        var isKeyValid = await _recommendationRepository.IsKeyValid(key);
+        if (!isKeyValid)
             throw new ArgumentException($"Recommendation with key {key} was not found.");
 
-        return recommendation.Description;
+        return key;
     }
 }

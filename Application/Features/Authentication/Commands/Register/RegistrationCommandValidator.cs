@@ -23,11 +23,11 @@ public class RegistrationCommandValidator : AbstractValidator<RegistrationComman
             .MaximumLength(50).WithMessage("{PropertyName} must not exceed {ComparisonValue} characters.");
 
         RuleFor(p => p.Sex)
-            .Must(MustBeValid).WithMessage("{PropertyName} can only have \"Male\" or \"Female\" values.");
+            .Must(MustBeValid).WithMessage("{PropertyName} can only have \"male\" or \"female\" values.");
     }
 
     private bool MustBeValid(string sex)
     {
-        return sex is "Male" or "Female";
+        return sex is "male" or "female";
     }
 }

@@ -5,5 +5,4 @@ namespace Domain;
 public class Recommendation : BaseEntity
 {
     public string Key { get; set; } = null!;
-    public string Description { get; set; } = null!;
 }
