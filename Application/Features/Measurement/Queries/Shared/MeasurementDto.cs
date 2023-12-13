@@ -2,6 +2,7 @@
 
 public class MeasurementDto
 {
+    public string MemberId { get; set; }
     public DateTime DateAndTime { get; set; }
     public double Height { get; set; }
     public double Weight { get; set; }
@@ -10,5 +11,6 @@ public class MeasurementDto
     public int UpperPressure { get; set; }
     public int LowerPressure { get; set; }
     
-    public string MemberId { get; set; }
+    public double BodyMassIndex { get; set; }
+    public double LevelOfStress { get; set; }
 }
