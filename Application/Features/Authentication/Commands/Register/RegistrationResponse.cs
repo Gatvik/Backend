@@ -2,5 +2,6 @@
 
 public class RegistrationResponse
 {
-    public string Id { get; set; }
+    public string Id { get; set; } = null!;
+    public string Token { get; set; } = null!;
 }
