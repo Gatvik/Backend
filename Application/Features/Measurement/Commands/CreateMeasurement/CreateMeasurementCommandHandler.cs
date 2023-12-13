@@ -6,14 +6,14 @@ using MediatR;
 
 namespace Application.Features.Measurement.Commands.CreateMeasurement;
 
-public class CreateMeasurementHandler : IRequestHandler<CreateMeasurementCommand, int>
+public class CreateMeasurementCommandHandler : IRequestHandler<CreateMeasurementCommand, int>
 {
     private readonly IMeasurementRepository _measurementRepository;
     private readonly IUserService _userService;
     private readonly IMapper _mapper;
     private readonly IMemberRepository _memberRepository;
 
-    public CreateMeasurementHandler(IMeasurementRepository measurementRepository, IUserService userService,
+    public CreateMeasurementCommandHandler(IMeasurementRepository measurementRepository, IUserService userService,
         IMapper mapper, IMemberRepository memberRepository)
     {
         _measurementRepository = measurementRepository;
