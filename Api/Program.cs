@@ -22,12 +22,13 @@ builder.Services.AddCors(options =>
         builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
-
+// Add HttpContext to interact with current request
 builder.Services.AddHttpContextAccessor();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Add Swagger to the project
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
+    // Add JWT Authentication description to Swagger
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {
         Description = "Jwt Auth header using the bearer scheme. Enter 'Bearer' [space] and then your token in the text input below.",
@@ -35,7 +36,7 @@ builder.Services.AddSwaggerGen(options =>
         In = ParameterLocation.Header,
         Scheme = "Bearer"
     });
-    
+    // Add JWT Authentication requirement to Swagger
     options.AddSecurityRequirement(new OpenApiSecurityRequirement()
     {
         {
@@ -56,7 +57,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
-
+// Use global exception handler
 app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
@@ -64,12 +65,14 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    // Show more detailed errors in development
     IdentityModelEventSource.ShowPII = true; 
 }
 
 app.UseHttpsRedirection();
+// Use "all" CORS policy, specified above
 app.UseCors("all");
-
+// Use authentication and authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
