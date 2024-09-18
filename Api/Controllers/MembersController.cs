@@ -1,7 +1,7 @@
 ﻿using Application.Features.Authentication.Commands.ChangeEmail;
 using Application.Features.Authentication.Commands.ChangePassword;
 using Application.Features.Member.Commands.DeleteMemberById;
-using Application.Features.Member.Commands.EnrollMemberToGym;
+using Application.Features.Member.Commands.EnrollMemberToPool;
 using Application.Features.Member.Commands.LeaveFromGym;
 using Application.Features.Member.Commands.UpdateMember;
 using Application.Features.Member.Queries.GetAll;
@@ -50,9 +50,9 @@ public class MembersController : ControllerBase
         return Ok(members);
     }
     
-    [HttpPut("enrollToGym")]
+    [HttpPut("enrollToPool")]
     [Authorize(Roles = "Administrator")]
-    public async Task<ActionResult> EnrollMemberToGym(EnrollMemberToGymCommand command)
+    public async Task<ActionResult> EnrollMemberToPool(EnrollMemberToPoolCommand command)
     {
         await _mediator.Send(command);
         return NoContent();
@@ -80,9 +80,9 @@ public class MembersController : ControllerBase
         return NoContent();
     }
     
-    [HttpPut("leaveFromGym")]
+    [HttpPut("leaveFromPool")]
     [Authorize(Roles = "Member")]
-    public async Task<ActionResult> LeaveFromGym()
+    public async Task<ActionResult> LeaveFromPool()
     {
         await _mediator.Send(new LeaveFromGymCommand());
         return NoContent();

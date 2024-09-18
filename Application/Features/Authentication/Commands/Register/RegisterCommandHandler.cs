@@ -66,8 +66,9 @@ public class RegisterCommandHandler : IRequestHandler<RegistrationCommand, Regis
         
         return new RegistrationResponse
         {
-            Id = user.Id, 
-            Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken)
+            UserId = user.Id, 
+            Bearer = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+            Role = "Member"
         };
 
     }

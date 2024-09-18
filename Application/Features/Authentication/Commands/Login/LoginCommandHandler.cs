@@ -47,12 +47,13 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponse>
         }
 
         JwtSecurityToken jwtSecurityToken = await new JwtTokenGenerator(_userManager, _jwtSettings).GenerateTokenAsync(user);
+        var roles = await _userManager.GetRolesAsync(user);
 
         var response = new LoginResponse
         {
-            Id = user.Id,
-            Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-            Email = user.Email!
+            UserId = user.Id,
+            Bearer = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+            Role = roles[0]
         };
 
         return response;

@@ -8,12 +8,10 @@ namespace Application.Services;
 
 public class UserService : IUserService
 {
-    private readonly UserManager<IdentityUser> _userManager;
     private readonly IHttpContextAccessor _contextAccessor;
 
-    public UserService(UserManager<IdentityUser> userManager, IHttpContextAccessor contextAccessor)
+    public UserService(IHttpContextAccessor contextAccessor)
     {
-        _userManager = userManager;
         _contextAccessor = contextAccessor;
     }
 

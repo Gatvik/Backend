@@ -6,4 +6,5 @@ public interface IMemberRepository : IGenericRepository<Member>
 {
     Task<Member?> GetByIdentityIdAsync(string identityId);
     Task<Member?> GetWithGymByIdentityIdAsync(string identityId);
+    Task<List<Member>> GetAllWithGymByIdentityIdAsync();
 }

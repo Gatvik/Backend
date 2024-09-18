@@ -18,7 +18,7 @@ public class SharedMethods
 
         recommendations.Add(new RecommendationDto
         {
-            Theme = "Body mass index",
+            Theme = "bmi",
             Key = measurement.BodyMassIndex switch
             {
                 <= 16.0d => await ValidateKey("ExtremelyLowBMI"),
@@ -31,7 +31,7 @@ public class SharedMethods
 
         recommendations.Add(new RecommendationDto
         {
-            Theme = "Level of stress",
+            Theme = "levelOfStress",
             Key = measurement.LevelOfStress switch
             {
                 <= 107.5d => await ValidateKey("NormalStress"),
@@ -41,7 +41,7 @@ public class SharedMethods
 
         var upperPressure = measurement.UpperPressure;
         var lowerPressure = measurement.LowerPressure;
-        var pressureRecommendation = new RecommendationDto { Theme = "Blood pressure" };
+        var pressureRecommendation = new RecommendationDto { Theme = "pressure" };
 
         if (upperPressure < 125)
         {
@@ -78,7 +78,7 @@ public class SharedMethods
         {
             recommendations.Add(new RecommendationDto
             {
-                Theme = "Fat percentage",
+                Theme = "fat",
                 Key = measurement.FatPercentage switch
                 {
                     < 14.0d => await ValidateKey("LowFat"),
@@ -89,7 +89,7 @@ public class SharedMethods
             
             recommendations.Add(new RecommendationDto
             {
-                Theme = "Muscle percentage",
+                Theme = "muscle",
                 Key = measurement.MusclePercentage switch
                 {
                     < 35.0d => await ValidateKey("LowMuscle"),
@@ -111,7 +111,7 @@ public class SharedMethods
         {
             recommendations.Add(new RecommendationDto
             {
-                Theme = "Fat percentage",
+                Theme = "fat",
                 Key = measurement.FatPercentage switch
                 {
                     < 19.0d => await ValidateKey("LowFat"),
@@ -122,7 +122,7 @@ public class SharedMethods
             
             recommendations.Add(new RecommendationDto
             {
-                Theme = "Muscle percentage",
+                Theme = "muscle",
                 Key = measurement.FatPercentage switch
                 {
                     < 25.0d => await ValidateKey("LowMuscle"),

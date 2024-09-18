@@ -2,6 +2,7 @@
 
 public class RegistrationResponse
 {
-    public string Id { get; set; } = null!;
-    public string Token { get; set; } = null!;
+    public string UserId { get; set; } = null!;
+    public string Bearer { get; set; } = null!;
+    public string Role { get; set; } = null!;
 }

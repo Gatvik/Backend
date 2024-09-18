@@ -19,7 +19,7 @@ public class GetMemberByIdentityIdQueryHandler : IRequestHandler<GetMemberByIden
 
     public async Task<MemberDto> Handle(GetMemberByIdentityQuery request, CancellationToken cancellationToken)
     {
-        var member = await _memberRepository.GetByIdentityIdAsync(request.IdentityId);
+        var member = await _memberRepository.GetWithGymByIdentityIdAsync(request.IdentityId);
         if (member is null)
             throw new NotFoundException(nameof(Member), request.IdentityId);
 

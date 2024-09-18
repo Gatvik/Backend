@@ -20,7 +20,15 @@ public class MemberRepository : GenericRepository<Member>, IMemberRepository
     {
         return Context.Members
             .AsNoTracking()
-            .Include(m => m.Gym)
+            .Include(m => m.Pool)
             .FirstOrDefaultAsync(m => m.IdentityId == identityId);
+    }
+
+    public Task<List<Member>> GetAllWithGymByIdentityIdAsync()
+    {
+        return Context.Members
+            .AsNoTracking()
+            .Include(m => m.Pool)
+            .ToListAsync();
     }
 }

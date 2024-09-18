@@ -19,7 +19,7 @@ public class GetAllMembersQueryHandler : IRequestHandler<GetAllMembersQuery, Lis
     
     public async Task<List<MemberDto>> Handle(GetAllMembersQuery request, CancellationToken cancellationToken)
     {
-        var members = await _memberRepository.GetAllAsync();
+        var members = await _memberRepository.GetAllWithGymByIdentityIdAsync();
         if (members.Count == 0)
             throw new NotFoundException("Members not found");
 

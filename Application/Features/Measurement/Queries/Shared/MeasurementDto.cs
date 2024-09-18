@@ -2,7 +2,8 @@
 
 public class MeasurementDto
 {
-    public string MemberId { get; set; }
+    public int Id { get; set; }
+    public int MemberId { get; set; }
     public DateTime DateAndTime { get; set; }
     public double Height { get; set; }
     public double Weight { get; set; }

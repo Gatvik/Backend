@@ -22,16 +22,16 @@ public class DataController
     [FileDownload(FileName = "Data.xlsx")]
     public async Task<IActionResult> ExportData()
     {
-        var gyms = _context.Gyms.ToList();
-        var gymEnrollmentRequests = _context.GymEnrollmentRequests.ToList();
+        var pools = _context.Pools.ToList();
+        var poolEnrollmentRequests = _context.PoolEnrollmentRequests.ToList();
         var measurements = _context.Measurements.ToList();
         var members = _context.Members.ToList();
         
 
         using (var workbook = new XLWorkbook())
         {
-            AddWorksheet(workbook, "Gyms", gyms);
-            AddWorksheet(workbook, "GymEnrollmentRequests", gymEnrollmentRequests);
+            AddWorksheet(workbook, "Pools", pools);
+            AddWorksheet(workbook, "PoolEnrollmentRequests", poolEnrollmentRequests);
             AddWorksheet(workbook, "Measurements", measurements);
             AddWorksheet(workbook, "Members", members);
 

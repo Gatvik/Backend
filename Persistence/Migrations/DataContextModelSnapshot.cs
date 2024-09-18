@@ -22,61 +22,6 @@ namespace Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Gym", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Gyms");
-                });
-
-            modelBuilder.Entity("Domain.GymEnrollmentRequest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("EnrollmentDateTime")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("GymId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("MemberId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GymEnrollmentRequests");
-                });
-
             modelBuilder.Entity("Domain.Measurement", b =>
                 {
                     b.Property<int>("Id")
@@ -137,9 +82,6 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("GymId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("IdentityId")
                         .IsRequired()
                         .HasColumnType("text");
@@ -148,13 +90,16 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("PoolId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Sex")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GymId");
+                    b.HasIndex("PoolId");
 
                     b.ToTable("Members");
 
@@ -168,6 +113,61 @@ namespace Persistence.Migrations
                             LastName = "Userovich",
                             Sex = "Male"
                         });
+                });
+
+            modelBuilder.Entity("Domain.Pool", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pools");
+                });
+
+            modelBuilder.Entity("Domain.PoolEnrollmentRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("EnrollmentDateTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("MemberId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PoolId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PoolEnrollmentRequests");
                 });
 
             modelBuilder.Entity("Domain.Recommendation", b =>
@@ -282,21 +282,21 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Member", b =>
                 {
-                    b.HasOne("Domain.Gym", "Gym")
+                    b.HasOne("Domain.Pool", "Pool")
                         .WithMany("Members")
-                        .HasForeignKey("GymId");
+                        .HasForeignKey("PoolId");
 
-                    b.Navigation("Gym");
-                });
-
-            modelBuilder.Entity("Domain.Gym", b =>
-                {
-                    b.Navigation("Members");
+                    b.Navigation("Pool");
                 });
 
             modelBuilder.Entity("Domain.Member", b =>
                 {
                     b.Navigation("Measurements");
+                });
+
+            modelBuilder.Entity("Domain.Pool", b =>
+                {
+                    b.Navigation("Members");
                 });
 #pragma warning restore 612, 618
         }

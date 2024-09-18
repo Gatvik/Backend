@@ -18,8 +18,8 @@ public class DataContext : DbContext
     }
     
     public DbSet<Member> Members { get; set; } = null!;
-    public DbSet<Gym> Gyms { get; set; } = null!;
+    public DbSet<Pool> Pools { get; set; } = null!;
     public DbSet<Measurement> Measurements { get; set; } = null!;
-    public DbSet<GymEnrollmentRequest> GymEnrollmentRequests { get; set; } = null!;
+    public DbSet<PoolEnrollmentRequest> PoolEnrollmentRequests { get; set; } = null!;
     public DbSet<Recommendation> Recommendations { get; set; } = null!;
 }

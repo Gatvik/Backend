@@ -24,7 +24,7 @@ public class GetMemberByCurrentUserQueryHandler : IRequestHandler<GetMemberByCur
     public async Task<MemberDto> Handle(GetMemberByCurrentUserQuery request, CancellationToken cancellationToken)
     {
         var currentUserId = _userService.UserId;
-        var member = await _memberRepository.GetByIdentityIdAsync(currentUserId);
+        var member = await _memberRepository.GetWithGymByIdentityIdAsync(currentUserId);
         if (member is null)
             throw new NotFoundException("Member don't binded to identity user... Please contact with admin.");
         

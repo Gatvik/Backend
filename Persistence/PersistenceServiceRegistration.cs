@@ -20,8 +20,8 @@ public static class PersistenceServiceRegistration
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IMeasurementRepository, MeasurementRepository>();
         services.AddScoped<IMemberRepository, MemberRepository>();
-        services.AddScoped<IGymEnrollmentRepository, GymEnrollmentRepository>();
-        services.AddScoped<IGymRepository, GymRepository>();
+        services.AddScoped<IPoolEnrollmentRepository, PoolEnrollmentRepository>();
+        services.AddScoped<IPoolRepository, PoolRepository>();
         services.AddScoped<IRecommendationRepository, RecommendationRepository>();
 
         return services;

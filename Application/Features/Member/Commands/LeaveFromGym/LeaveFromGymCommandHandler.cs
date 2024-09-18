@@ -23,7 +23,7 @@ public class LeaveFromGymCommandHandler : IRequestHandler<LeaveFromGymCommand, U
         if (member is null)
             throw new NotFoundException("Member don't binded to identity user... Please contact with admin.");
         
-        member.GymId = null;
+        member.PoolId = null;
         await _memberRepository.UpdateAsync(member);
         
         return Unit.Value;
